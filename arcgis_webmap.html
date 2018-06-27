@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+	<!-- CSS Sheet for ArcGIS JS API -->
+	<link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+	<!-- Script for ArcGIS JS API -->
+	<script src="https://js.arcgis.com/4.7/"></script>
+  </head>
+  <body>
+	<script>
+	require([
+		//Three modules from the API needed to load code for creating a 2D map
+		"esri/Map",
+		"esri/views/MapView",
+		"dojo/domReady!"
+	], function(Map, SceneView) {
+		var map = new Map({
+			basemap: "streets"
+		}); // creates new map with streets basemap
+		
+		var view = new SceneView({
+			container: "viewDiv",
+			map: map, //references map variable created in previous function
+			center: [-97, 40],
+			zoom: 4
+		});
+	});
+	
+	</script>
+	<div id = "viewDiv" style = 'height: 80vh; width: 80vw;'></div>
+  </body>
+</html>

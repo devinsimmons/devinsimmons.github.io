@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Charging Stations</title>
+    <meta charset="UTF-8" />
+    <!-- personal stylesheet -->
+    <link rel = 'stylesheet' type = 'text/css' href = 'devinsimmons.github.io/portfolio.css'>
+    <!-- Bootstrap stylesheets -->
+    <<!-- Bootstrap core CSS -->
+    <link href="devinsimmons.github.io/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="devinsimmons.github.io/css/1-col-portfolio.css" rel="stylesheet">
+    
+    <!-- CSS sheet and javascript for leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+</head>
+
+<body>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Devin Simmons</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="devinsimmons.github.io/index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/projects.html">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/resume.html">Resume</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div id= 'myMap' class = webmap ></div>
+    <p style = 'margin-left: 13vw; margin-right: 13vw;'>This web map was made using the Leaflet JavaScript library.
+    Click on a point to learn more about each station and its accessibility! 
+    </p>
+    <!-- Script to create and set basemap -->
+    <script>
+        var chargingMap = L.map('myMap').setView([38.8, -77.2], 8);
+        
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2ltbW9uc2QiLCJhIjoiY2poeXk3YzlpMHJsbTNwcnYyNW1zeG9vMCJ9.sRhhJsrU0qUGbM7LiSrW_Q', {
+            attribution: 'Map data &copy; <a href = "http://data.imap.maryland.gov/datasets/maryland-alternative-fuel-electric-vehicle-charging-stations">Maryland Open Data</a>, <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+        }).addTo(chargingMap);
+        
+    </script>
+    <!-- Connects to file that contains geoJSON data on charging points -->
+    <script src = 'charging_stations2.js'></script>
+    
+    <!-- Adds geojson to the map and styles the points -->
+    <script>
+        //function that creates pop ups for each point
+        function chargingAttributes (feature, layer) {
+            var popupContent = '';
+            popupContent += feature.properties.Street_Add + ', ' + feature.properties.City + "<br>";
+            if (feature.properties.Station_Ph.length > 1) {
+                popupContent += "Phone: " + feature.properties.Station_Ph + '<br>';
+            }
+            if (feature.properties.Intersecti.length > 1 && feature.properties.Intersecti !== ('null' || 'null null' )) {
+                popupContent += "Details: " + feature.properties.Intersecti + "<br>";
+            }
+            popupContent += "Access: " + feature.properties.Groups_Wit + "<br>";
+            if (feature.properties.Access_Day.length > 1 && feature.properties.Access_Day !==
+                ('MON: 24 hours | TUE: 24 hours | WED: 24 hours | THU: 24 hours | FRI: 24 hours | SAT: 24 hours | SUN: 24 hours' || 'MO: 12:00am-12:00am; TU: 12:00am-12:00am; WE: 12:00am-12:00am; TH: 12:00am-12:00am; FR: 12:00am-12:00am; SA: 12:00am-12:00am; SU: 12:00am-12:00am')) {
+                popupContent += 'Hours: ' + feature.properties.Access_Day + '<br>';
+                } else {
+                    if (feature.properties.Access_Day.length > 1) {
+                        popupContent += '24 hours daily <br>' ;
+                    }
+                }
+            if (feature.properties.EV_Network.length > 1) {
+                popupContent += "EV Network: " + feature.properties.EV_Network + '<br>';
+            }
+            if (feature.properties.EV_Connect.length > 1) {
+                popupContent += 'EV Connector Type: ' + feature.properties.EV_Connect + '<br>';
+            }
+            layer.bindPopup(popupContent);
+        }
+        //stores style for point symbology
+        var geojsonMarkerOptions = {
+            radius: 3.5,
+            fillColor: "#00cc00",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.7
+        };
+        //takes the geoJSON variable, attaches event handlers to generate popups, applies style, and then loads geoJSON to the map
+        L.geoJSON(charging_stations, {
+            onEachFeature: chargingAttributes,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojsonMarkerOptions);
+            } 
+        }).addTo(chargingMap);
+        L.control.scale().addTo(chargingMap);
+    </script>
+    
+    <!-- footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Devin Simmons 2018</p>
+        </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

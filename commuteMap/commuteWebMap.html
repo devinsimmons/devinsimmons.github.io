@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Commute Times</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="devinsimmons.github.io/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="devinsimmons.github.io/css/1-col-portfolio.css" rel="stylesheet">
+    
+    <!-- Leaflet css and js files -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+	<!-- JS file containing object information for my map -->
+    <script src = "commute_times2.js"> </script>
+	<!--Personal CSS file -->
+    <link rel = 'stylesheet' href = 'devinsimmons.github.io/portfolio.css' type = 'text/css' />
+	<style>
+		/*style info for leaflet legends*/
+		.legend {
+			line-height: 18px;
+			color: black;
+			border-radius: 5px;
+			background-color: #f5f5f5;
+			padding-right: 1em;
+			padding-left: 0.5em;
+			padding-bottom: 0.5em;
+		}
+		.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.7;
+			border-radius: 2px;
+		}
+		/*style info for leaflet hover box*/
+		.info {
+		    padding: 6px 8px;
+		    background: white;
+		    background: rgba(255,255,255,0.8);
+		    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+		    border-radius: 5px;
+		}
+		.info h4 {
+		    margin: 0 0 5px;
+		    color: #777;
+		}
+		
+	</style>
+	
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Devin Simmons</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="devinsimmons.github.io/index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/projects.html">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/resume.html">Resume</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page content -->
+    <div id="mapid" class = 'webmap'>
+		<script src = "commuteTimesMap.js"></script>
+	</div>
+	<p style = 'margin-right: 12vw; margin-left: 12vw;'>This map, produced using census (ACS) data from 2016,
+	displays commute times for each state. Check out different time ranges using the layer control in the bottom
+	left corner!</p>
+			
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Devin Simmons 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
