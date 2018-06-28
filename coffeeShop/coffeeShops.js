@@ -5,7 +5,7 @@
             });
             //re-adds the tile layer
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2ltbW9uc2QiLCJhIjoiY2poeXk3YzlpMHJsbTNwcnYyNW1zeG9vMCJ9.sRhhJsrU0qUGbM7LiSrW_Q', {
-                attribution: 'Map data &copy; <a href = "http://data.imap.maryland.gov/datasets/maryland-alternative-fuel-electric-vehicle-charging-stations">Maryland Open Data</a>, <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                attribution: 'Map data &copy; <a href = "http://dining.umd.edu/locations/">UMD Dining</a>, <a href="https://www.openstreetmap.org/"> OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
                 id: 'mapbox.streets',
             }).addTo(coffeeMap);
