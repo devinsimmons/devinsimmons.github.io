@@ -1,4 +1,4 @@
-        function newMap() {
+	function newMap() {
             //removes all layers from the map
             coffeeMap.eachLayer(function (layer) {
                 coffeeMap.removeLayer(layer);
@@ -11,17 +11,17 @@
             }).addTo(coffeeMap);
 
 			//gets time from the html control
-            var time = (document.getElementById("userTime").value);
+            time = (document.getElementById("userTime").value);
             //gets rid of the semi-colon and converts the variable to a number that matches
             //closing and opening times in the geojson
             time = time.slice(0, 2) + time.slice(3, 5);
             time = Number(time);
             
-            var day = document.getElementById("userDay").value;
+            day = document.getElementById("userDay").value;
             
             //these variables match the field names the function will search for in the geoJSON
-            var openTime = day + "_open";
-            var closeTime = day + "_close";
+            openTime = day + "_open";
+            closeTime = day + "_close";
             
             //adds a geoJSON layer to the map 
             currentLayer = L.geoJSON(coffeeShops, {
@@ -63,7 +63,7 @@
         
 		//adds a scale
 		L.control.scale().addTo(coffeeMap);
-        
+       
 		//stores style for point symbology
         var geojsonMarkerOptions = new L.icon({
             iconUrl: 'coffeeLogo.png',
@@ -71,6 +71,63 @@
 			iconAnchor: [25, 50], // point of the icon which will correspond to marker's location
 			popupAnchor: [0, -50] // point from which the popup should open relative to the iconAnchor
         });
+	   
+		
+		
+	//gets a number associated with what day/time it is when the user loads the page, then matches the number
+	//to the real name of the day and formats the time
+	var d = new Date();
+	
+	var hour = d.getHours().toString();
+	var minutes = d.getMinutes().toString();	
+	var time = Number(hour + minutes);
+		
+	var weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+		
+	//loops through weeksdays and matches day value with associated index value
+	var day = d.getDay();
+	for (var i = 0; i < weekdays.length; i++) {
+		if (day === i) {
+			day = weekdays[i];	
+		}
+	}
+	var openTime = day + "_open";
+        var closeTime = day + "_close";
+
+		
+	//calls the layer function when the page loads, displays shops based on the time and day the page loads
+	//adds a geoJSON layer to the map 
+        currentLayer = L.geoJSON(coffeeShops, {
+		//configures popups
+		onEachFeature: onEachShop, 
+            	//adds custom icon to represent each point
+		pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, {icon: geojsonMarkerOptions});
+            },
+            //filter that only adds features that are open given the day and time
+            filter: function(feature, layer) {
+                //south commons shop and north convenience are the only shops
+                //that close in the AM and need a different expression
+                if(feature.properties.Name === 'South Commons Shop' || feature.properties.Name === 'North Convenience') {
+                    if (time <= 100 || time >= feature.properties[openTime]) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    if(time >= feature.properties[openTime] && time < feature.properties[closeTime]) {
+                        return true; 
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        });
+        //adds open coffee shops to the map
+        currentLayer.addTo(coffeeMap);
+
+		
+		
         
 		//contains each field name that will be displayed in the popup and its assc. alias
         var shopFields = {
@@ -96,35 +153,35 @@
             for(var field in shopFields) {
                 if(feature.properties[field]) {
                     var time = feature.properties[field];
-					var fieldName = shopFields[field];
+			var fieldName = shopFields[field];
                     if (time >= 1200 && time < 2400) {
-						//pm times
-						if (time >= 1300) {
-							time = time - 1200;
-						}
-						time = time + " p.m.";
-					} else { 
-						//am times
-						if (time === 2400) {
-							time -= 1200;
-						}
-						time = time + " a.m.";
-					}
-					//adds colon to time string
-					if (time.length === 9) {
-						time = time.slice(0, 2) + ":" + time.slice(2, 10);
-					} else {
-						time = time.slice(0, 1) + ":" + time.slice(1, 9);
-					}
-					popupContent += "<span>" + fieldName + ": " + time + "</span><br>";
+			//pm times
+			if (time >= 1300) {
+				time = time - 1200;
+			}
+		    time = time + " p.m.";
+		    } else { 
+			//am times
+			if (time === 2400) {
+				time -= 1200;
+			}
+			time = time + " a.m.";
+		     }
+			//adds colon to time string
+		     if (time.length === 9) {
+				time = time.slice(0, 2) + ":" + time.slice(2, 10);
+			} else {
+				time = time.slice(0, 1) + ":" + time.slice(1, 9);
+			}
+			popupContent += "<span>" + fieldName + ": " + time + "</span><br>";
                 }
             }
-			layer.bindPopup(popupContent);
+	    layer.bindPopup(popupContent);
         }
 		
-		var style = {
-			"fillColor": "#00FFFFFF",
-			"color": "#5998ff",
-			"weight": 3,
-			"opacity": 1
-		}
+	var style = {
+		"fillColor": "#00FFFFFF",
+		"color": "#5998ff",
+		"weight": 3,
+		"opacity": 1
+	}
