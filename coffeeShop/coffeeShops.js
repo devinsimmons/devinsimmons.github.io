@@ -72,7 +72,24 @@
 		popupAnchor: [0, -50] // point from which the popup should open relative to the iconAnchor
         });
 	   
-		
+	//contains each field name that will be displayed in the popup and its assc. alias
+	//needs to be declared before layers are loaded
+        var shopFields = {
+            'Mon_open': 'Monday Open',
+            'Mon_close': 'Monday Close',
+            'Tue_open': 'Tuesday Open',
+            'Tue_close': 'Tuesday Close',
+            'Wed_open': 'Wednesday Open',
+            'Wed_close': 'Wednesday Close',
+            'Thu_open': 'Thursday Open',
+            'Thu_close': 'Thursday Close',
+            'Fri_open': 'Friday Open',
+            'Fri_close': 'Friday Close',
+            'Sat_open': 'Saturday Open',
+            'Sat_close': 'Saturday Close',
+            'Sun_open': 'Sunday Open',
+            'Sun_close': 'Sunday Close'
+        };	
 		
 	//gets a number associated with what day/time it is when the user loads the page, then matches the number
 	//to the real name of the day and formats the time
@@ -135,23 +152,7 @@
 		
 		
         
-		//contains each field name that will be displayed in the popup and its assc. alias
-        var shopFields = {
-            'Mon_open': 'Monday Open',
-            'Mon_close': 'Monday Close',
-            'Tue_open': 'Tuesday Open',
-            'Tue_close': 'Tuesday Close',
-            'Wed_open': 'Wednesday Open',
-            'Wed_close': 'Wednesday Close',
-            'Thu_open': 'Thursday Open',
-            'Thu_close': 'Thursday Close',
-            'Fri_open': 'Friday Open',
-            'Fri_close': 'Friday Close',
-            'Sat_open': 'Saturday Open',
-            'Sat_close': 'Saturday Close',
-            'Sun_open': 'Sunday Open',
-            'Sun_close': 'Sunday Close'
-        };
+	
         
 		//function that determines and formats popup content for each coffee shop
         function onEachShop(feature, layer) {
