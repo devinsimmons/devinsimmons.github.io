@@ -54,22 +54,22 @@
             currentLayer.addTo(coffeeMap);
         }
         //initializes the map object
-		var coffeeMap = L.map('coffeeMap').setView([38.9869, -76.9426], 15);
+	var coffeeMap = L.map('coffeeMap').setView([38.9869, -76.9426], 15);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2ltbW9uc2QiLCJhIjoiY2poeXk3YzlpMHJsbTNwcnYyNW1zeG9vMCJ9.sRhhJsrU0qUGbM7LiSrW_Q', {
                 attribution: 'Map data &copy; <a href = "http://dining.umd.edu/locations/">Univ. of Maryland Dining</a>, <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
                 id: 'mapbox.streets',
             }).addTo(coffeeMap);
         
-		//adds a scale
-		L.control.scale().addTo(coffeeMap);
+	//adds a scale
+	L.control.scale().addTo(coffeeMap);
        
-		//stores style for point symbology
+	//stores style for point symbology
         var geojsonMarkerOptions = new L.icon({
             iconUrl: 'coffeeLogo.png',
-			iconSize: [50, 50], // size of the icon
-			iconAnchor: [25, 50], // point of the icon which will correspond to marker's location
-			popupAnchor: [0, -50] // point from which the popup should open relative to the iconAnchor
+		iconSize: [50, 50], // size of the icon
+		iconAnchor: [25, 50], // point of the icon which will correspond to marker's location
+		popupAnchor: [0, -50] // point from which the popup should open relative to the iconAnchor
         });
 	   
 		
@@ -78,8 +78,14 @@
 	//to the real name of the day and formats the time
 	var d = new Date();
 	
-	var hour = d.getHours().toString();
-	var minutes = d.getMinutes().toString();	
+	var hour = d.getHours();
+	var minutes = d.getMinutes();	
+	if (minutes < 10) {
+	//adds a zero where it would belong on the clock
+		hour *= 10;
+	}	
+	hour = hour.toString();
+	minutes = minutes.toString();
 	var time = Number(hour + minutes);
 		
 	var weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
