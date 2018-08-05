@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <!-- Bootstrap core CSS -->
+    <link href="https://devinsimmons.github.io/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://devinsimmons.github.io/css\1-col-portfolio.css" rel="stylesheet">
+    
+    <!-- my css file -->
+    <link href = 'https://devinsimmons.github.io/portfolio.css' type = 'text/css' rel = 'stylesheet'/>
+
+    <!-- chart.js file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Devin Simmons</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="devinsimmons.github.io/index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/projects.html">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/resume.html">Resume</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="devinsimmons.github.io/contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h2 style = "text-align: center; margin-top: 1em;">All Capital Bikeshare Trips in June 2018</h2>
+    <a href = 'trip_frequencies.png'>
+        <img src = 'trip_frequencies.png' class = 'pictures' style = 'height: 90vh;'/>
+    </a>
+	<p style = "margin-right: 15vw; margin-left: 15vw;">This is my first project to incorporate a spatial database via PostgreSQL/PostGIS. I downloaded
+    <a href = "https://www.capitalbikeshare.com/system-data">Capital Bikeshare trip data</a> for June 2018 and loaded it into PostGIS, where
+    I <a href = "https://github.com/devinsimmons/CaBi/blob/master/PostGIS_Queries/alter_geometry.sql">created line geometries</a>
+    based on origin and destination coordinates. I then <a href = "https://github.com/devinsimmons/CaBi/blob/master/PostGIS_Queries/number_of_trips.sql">
+    grouped the trips by their origin and destination</a>, counting how often each one occurred. Finally, the data was loaded into QGIS.
+    Overall, the CaBi system saw 392,338 trips in June 2018, 43,511 of which were unique. <br><br>
+    I also thought it would be interesting to visualize the patterns of casual trips vs. member trips. To do this, I
+    <a href = "https://github.com/devinsimmons/CaBi/blob/master/PostGIS_Queries/geo_gifs/find_popular_days.sql">queried
+    how many trips occurred each day by member type</a>. Below, the results are visualized with Chart.JS. Interestingly, despite
+    the high number of tourists visiting the District each summer, casual rides never surpassed member rides in June.</p>
+	
+    <script type="text/javascript" src = "cabi_trips_by_day_june.js"></script>
+    <div class="chart-container" style="height:50vh; width:70vw; margin: auto;">
+        <canvas id="myChart" height = "20" width = "70"></canvas>
+    </div>
+    <script type = "text/javascript" src = "cabi_line_graph.js"></script>
+    
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Devin Simmons 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://devinsimmons.github.io/vendor/jquery/jquery.min.js"></script>
+    <script src="https://devinsimmons.github.io/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
