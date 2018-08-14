@@ -54,3 +54,7 @@ h1 {
 title {
     color: black;
 }
+
+h3:hover {
+    text-decoration: underline;
+}
