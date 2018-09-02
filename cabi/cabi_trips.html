@@ -64,6 +64,64 @@
         <canvas id="myChart" height = "20" width = "70"></canvas>
     </div>
     <script type = "text/javascript" src = "cabi_line_graph.js"></script>
+<p style = "width: 70vw; margin: auto;">After noticing temporal patterns in popularity for member and casual trips, I wanted to see
+    what spatial differences existed between them as well. As a result, I chose to visualize all trips
+    taken on a particular day. June 12th seemed like a good choice as it had the
+    most rides of that month. To visualize the trips, I
+    <a href ="https://github.com/devinsimmons/CaBi/blob/master/PostGIS_Queries/geo_gifs/tables_for_popular_days.sql">
+    selected all trips that took place on June 12th</a> and then used the QGIS Time Manager plugin to animate
+    the trips throughout the day. Post-processing was performed with GIMP.<br><br>
+    In the GeoGIF below, we can observe a few interesting patterns. As a resident of Prince George's County,
+    my attention was first drawn to its stations, which were only just introduced in 2018.
+    Although the stops along the Route 1 corridor are not terribly close
+    to other portions of the CaBi network, riders are showing *some* willingness to make long trips to and from (mostly from)
+    this area. One can then imagine the possibilities if this corridor develops the CaBi density seen in other suburbs like
+    Arlington or Silver Spring.<br><br></p>
+    <a href = "https://i.imgur.com/lMmZDt1.gifv">
+        <img src = "https://i.imgur.com/lMmZDt1.gif" style = "width: 70vw;
+                                                        display: block;
+                                                        margin-left: auto;
+                                                        margin-right: auto;"/>
+    </a>
+    <br>
+    
+    <div class="chart-container" style="height:50vh; width:70vw; margin: auto;">
+        <canvas id="hours_chart" height = "20" width = "70"></canvas>
+    </div>
+	
+    <table style = "margin-left: 15vw">
+        <tr>
+            <td style = "width: 140px; vertical-align: top">
+                <label>Day in June: <select id = "day_selector">
+                    <option selected = "selected">
+                        12
+                    </option>
+                    <script>
+                        var day = 1;
+                        while(day < 31) {
+                            document.write("<option value = '" + day + "'>"+ day + "</option>");
+                            day += 1;
+                        }
+                    </script>
+                </select>
+                </label>
+                <br>
+                <button "type = "button" onclick = "new_chart();">Make new chart</button>
+            </td>
+            <td>
+                <p style = "margin-right: 15vw; vertical-align: top">Using the selectors to the left, you can visualize a time distribution of CaBi trips for any
+                day in June on the chart below. This figure was also created using ChartJS. Even on tourist-heavy weekends, the member
+                rides generally outnumber the casual rides for any given hour.</p>
+            </td>
+            
+            
+        </tr>
+    </table>
+    
+    <script type = "text/javascript" src = "hour_trip.js"></script>
+	<script type = "text/javascript" src = "hour_trip_chart.js"></script>
+    
+    
     
     <!-- Footer -->
     <footer class="py-5 bg-dark">
