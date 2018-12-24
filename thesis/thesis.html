@@ -253,13 +253,14 @@ test_file = r"C:\Users\Devin Simmons\Desktop\GEOL393\flux_towers\figure_for_1st_
 test_flux = flux_module.flux_reader(test_file)
 
 test_flux.et_by_day()
-#gets data dictionary that contains 8-day flux measurement periods that
+#creates data dictionary that contains 8-day flux measurement periods that
 #can be compared to MOD16 8-day period. range represents the range of 
 #years analyzed
-in_flux = test_flux.valid_8day_by_year([i for i in range(2004, 2011)])
+test_flux.valid_8day_by_year([i for i in range(2004, 2011)])
 
 #creates the linreg plot. mod16 values is the dictionary that is ultimately
-#filled by instantiating the modis_et class, as shown above.
+#filled by instantiating the modis_et class, as shown above. flux tower values
+#were generated in the line above
 test_flux.linreg_et_plot(mod16_values, [i for i in range(2005, 2011)])
             </code>
         </pre>
