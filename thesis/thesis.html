@@ -58,17 +58,20 @@
     <a href = '2014_et_and_site_selection.png'>
         <img src = '2014_et_and_site_selection.png' class = 'pictures' style = 'width: 50vw;'/>
     </a>
-	<p style = 'margin-left: 20em; margin-right: 20em; margin-top: 1.5em; margin-bottom: 1.5em'>
-        While the above map shows the ET product for all of 2014, I am comparing the MOD16 8-day products.
+	<p class = 'paragraph'>
+        While the above map shows the ET product for all of 2014, I am comparing the MOD16 8-day products to flux tower measurements.
         Data for the selected flux towers is available in CSV format, gathered from
         <a href = 'http://ameriflux.lbl.gov'>http://ameriflux.lbl.gov</a>. To compare MOD16 estimates to flux
         tower measurements of ET, I developed a python module that geoprocesses the MOD16 rasters and fills gaps
         in the flux tower measurements. Comparison is then made via time-series graphs and linear regression.
         The code below displays how the MOD16 rasters are bulk-downloaded:
-        <br>
-            <pre>
-              <code>
-                class download_modis:
+    </p>
+    <div>
+        <pre class = 'code_box'>
+            <code>
+from bs4 import BeautifulSoup
+import requests
+class download_modis:
     '''
     this class downloads modis data
     the __init__ function takes a list of years and a list of julian days
@@ -128,9 +131,13 @@ ca_qcu_rasters = download_modis(ca_qcu_years, ca_qcu_days, "h13v04",
                                 r'C:\Users\Devin Simmons\Desktop\GEOL393\figure_for_rd\gis_things\mod16_tiles')
 #actually downloads these files
 ca_qcu_rasters.download_mod16()
-
-              </code>
-            </pre>
+            </code>
+        </pre>
+    </div>
+    <p>
+    Next, I wrote a script to determine the MOD16 ET estimates for the selected flux towers. This invovled converting the MOD16
+    HDF files to rasters that could be processed in ArcPy, clipping these rasters to line within a certain radius of the tower,
+    and then averaging the values of the pixels left over after the clip occurred. A schematic below displays the script's workflow.
     </p>
     
     <!-- Footer -->

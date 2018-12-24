@@ -1,3 +1,15 @@
+.paragraph {
+    margin-left: 20em;
+    margin-right: 20em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em
+}
+.code_box {
+    width:50vw;
+    height:20em;
+    margin: auto;
+    overflow-x: scroll
+}
 .pictures {
     display: block;
     margin-left: auto;
