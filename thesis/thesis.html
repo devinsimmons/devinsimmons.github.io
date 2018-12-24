@@ -237,11 +237,66 @@ for raster in in_rasters:
         error, which requires hundreds of lines of code. As such, I will not include it in its entirety on this page,
         but I will show some snippets. The entirety of this code can be found <a href = 'https://github.com/devinsimmons/Senior_Thesis/'>
         on my github</a>. Below is a figure that displays a linear regression of flux tower ET measurements compared to
-        MOD16 estimates, made using matplotlib. In addition, the necessary code is shown as well.
+        MOD16 estimates, made using matplotlib and analyzed with scipy. In addition, the necessary code is shown as well.
     </p>
     <a href = 'CA-Qcu_linreg2.png'>
         <img src = 'CA-Qcu_linreg2.png' class = 'pictures' style = 'width: 50vw;'/>
     </a>
+    <div>
+        <pre class = 'code_box'>
+            <code class = 'prettyprint'>
+import flux_module
+#csv with flux tower data, downloaded from ameriflux website
+test_file = r"C:\Users\Devin Simmons\Desktop\GEOL393\flux_towers\figure_for_1st_pres\AMF_CA-Qcu_BASE_HH_1-1.csv"
+
+#reads in the flux tower csv file
+test_flux = flux_module.flux_reader(test_file)
+
+test_flux.et_by_day()
+#gets data dictionary that contains 8-day flux measurement periods that
+#can be compared to MOD16 8-day period. range represents the range of 
+#years analyzed
+in_flux = test_flux.valid_8day_by_year([i for i in range(2004, 2011)])
+
+#creates the linreg plot. mod16 values is the dictionary that is ultimately
+#filled by instantiating the modis_et class, as shown above.
+test_flux.linreg_et_plot(mod16_values, [i for i in range(2005, 2011)])
+            </code>
+        </pre>
+    </div>
+    <p class = 'paragraph'>
+        In addition, the flux_module has functions that make summary tables and time series graphs. Below is a time
+        series and the code that created it:
+    </p>
+    <a href = 'CA-Qcu_2006_time_Series.png'>
+        <img src = 'CA-Qcu_2006_time_Series.png' class = 'pictures' style = 'width: 50vw;'/>
+    </a>
+    <div>
+        <pre class = 'code_box'>
+            <code class = 'prettyprint'>
+import flux_module
+#csv with flux tower data, downloaded from ameriflux website
+test_file = r"C:\Users\Devin Simmons\Desktop\GEOL393\flux_towers\figure_for_1st_pres\AMF_CA-Qcu_BASE_HH_1-1.csv"
+
+#reads in the flux tower csv file
+test_flux = flux_module.flux_reader(test_file)
+
+test_flux.et_by_day()
+#gets data dictionary that contains 8-day flux measurement periods that
+#can be compared to MOD16 8-day period. range represents the range of 
+#years analyzed
+in_flux = test_flux.valid_8day_by_year([i for i in range(2004, 2011)])
+
+#creates a time series plot for each year in the range 204 - 2010.
+#mod16 values is the dictionary that is ultimately
+#filled by instantiating the modis_et class, as shown above.
+for i in range(2004, 2011):
+    test_flux.time_series_plot(in_flux, mod16_values, str(i))
+    plt.show()
+    plt.gcf().clear()
+            </code>
+        </pre>
+    </div>
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
