@@ -235,21 +235,6 @@
 		
 		layerWidget.setPosition('bottomleft');
 		layerWidget.addTo(ncfoMap);
-	
-        var terminal_names = [];
-		var trip_names = []
-		
-		for (var i = 0; i < (Object.values(terminals_json)[3]).length; i++) {
-			terminal_names.push(Object.values(terminals_json)[3][i]['properties']['terminal_name']);
-		}
-		
-		for (var i = 0; i < (Object.values(trips)[3]).length; i++) {
-			trip_names.push(Object.values(trips)[3][i]['properties']['segment_name']);
-		}
-		
-		console.log(terminal_names);
-		console.log(trip_names);
-		
 		//adds a search bar to the map
         var searchControl = new L.Control.Search({
             layer: triplines,
@@ -267,6 +252,21 @@
 		
 		ncfoMap.addControl(searchControl);
 		info.addTo(ncfoMap);
+        var terminal_names = [];
+		var trip_names = []
+		
+		for (var i = 0; i < (Object.values(terminals_json)[3]).length; i++) {
+			terminal_names.push(Object.values(terminals_json)[3][i]['properties']['terminal_name']);
+		}
+		
+		for (var i = 0; i < (Object.values(trips)[3]).length; i++) {
+			trip_names.push(Object.values(trips)[3][i]['properties']['segment_name']);
+		}
+		
+		console.log(terminal_names);
+		console.log(trip_names);
+		
+		
 
     </script>
 
