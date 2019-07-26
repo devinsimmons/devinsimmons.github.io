@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>NYC Bikeshare</title>
+    <meta charset="UTF-8" />
+    <!-- personal stylesheet -->
+    <link rel = 'stylesheet' type = 'text/css' href = 'https://devinsimmons.github.io/portfolio.css'>
+    <!-- Bootstrap stylesheets -->
+    
+    <!-- Bootstrap core CSS -->
+    <link href="https://devinsimmons.github.io/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://devinsimmons.github.io/css/1-col-portfolio.css" rel="stylesheet">
+    
+    <!-- javascript for google pretty code-->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Devin Simmons</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="https://devinsimmons.github.io/index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://devinsimmons.github.io/projects.html">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://devinsimmons.github.io/resume.html">Resume</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://devinsimmons.github.io/contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <p class = 'paragraph'>
+        Eager to learn about statistical and spatial analysis with R, I decided to learn some of its applications by 
+		analyzing NYC's Citibike bikeshare program. I gathered data for all rides taken from January through June of 2015. 
+		The general pattern of use throughout the course of the day is plotted below. 
+    </p>
+    <a href = 'daily_ridership_pattern.png'>
+        <img src = 'daily_ridership_pattern.png' class = 'pictures' style = 'width: 50vw;'/>
+    </a>
+	<p class = 'paragraph'>
+        As shown, more people commute with Citibike in the evening than in the morning. This pattern interested me and I began 
+		to think about what factors would cause this imbalance. Becoming sweaty before arriving at work is a major deterrent to 
+		cycling in the morning, and this factor wouldn't have as much impact on a commuter's willingness to cycle home from work. 
+		I also though about temperature, which is higher in the evening. To determine if temperature had an impact on ridership, I 
+		calculated the mean hourly temperature for each day in the study period and plotted that value against ridership. The results 
+		are shown in the two figures below.
+    </p>
+    
+	<a href = 'temp_and_ridership.png'>
+        <img src = 'temp_and_ridership.png' class = 'pictures' style = 'width: 50vw;'/>
+	</a>
+	
+	<a href = 'temp_and_bike_ridership_monthly.png'>
+        <img src = 'temp_and_bike_ridership_monthly.png' class = 'pictures' style = 'width: 50vw;'/>
+    </a>
+    
+	<p class = 'paragraph'>
+		The first figure shows results that aren't particularly surprising; cycling in cold weather is generally not pleasant. However,
+		the second figure reveals something interesting: in warm months, ridership is more sensitive to temperature changes than it is in cold
+		months. January and February both show flatlined ridership, suggesting that even on warm days, riders on the system are likely to be
+		part of a dedicated core of members who cycle regardless of the cold. <br><br>
+		Interested in how other weather conditions may impact ridership, I downloaded a csv file that described weather conditions qualitatively in 
+		NYC for each hour. I grouped the conditions into five broad categories and then determined the average hourly ridership for each category.
+    </p>
+
+	<a href = 'weather_conditions_ridership.png'>
+        <img src = 'weather_conditions_ridership.png' class = 'pictures' style = 'width: 50vw;'/>
+    </a>
+
+    <p class= 'paragraph'>
+        These results were a bit puzzling. Fog/haze/smoke likely has the highest value because these conditions are less likely to occur at 
+		night when baseline ridership is quite low. I can't think of factors that would cause riderhip when light rain is present to appear 
+		higher than ridership during normal conditions, however. <br><br>
+		As a geospatial professional, I had to explore some of R's spatial packages. Using the packages sp and geojsonio, I decided to map the stations
+		in Citibike's network circa 2015 based on ridership. One of the biggest challenges for docked bikeshare providers comes when stations are either
+		overcrowded, which prevents users from locking their bikes up, or completely empty. Given this challenge, I chose to map the number of arrivals and
+		departures at each station, as well as the difference between these two figures, which I termed "net ridership". The results are shown below.
+    </p>
+    <a href = 'bike_maps.png'>
+        <img src = 'bike_maps.png' class = 'pictures' style = 'width: 50vw;'/>
+    </a>
+    
+    <p class = 'paragraph'>
+        The net ridership map shows patterns that match up with the daily pattern of ridership: there are generally
+		 more depatures than arrivals in the central business district, which is midtown Manhattan in this case. This lines up 
+		with the higher ridership that occurs during the evening commute when workers would leave the CBD.
+		Interestingly, the secondary CBD in lower Manhattan does not display this same pattern of low net arrival values.
+		<br>
+		<br>
+		Learning about data visualization in R was fun and you can check out 
+		<a href= 'https://github.com/devinsimmons/HONR238V_project/blob/master/bikeshare/biketrips_correlation.R'> my code here. </a>
+    </p>
+    
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Devin Simmons 2019</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

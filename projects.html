@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title style = "color: black;">GIS Projects</title>
+    <title style = "color: black; fill: black">GIS Projects</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -55,7 +55,11 @@
     <div class="container">
 
       <!-- Page Heading -->
-      <h1 class="my-4">GIS Projects
+      <h1 class="my-4" style = 'font-size: 280%;
+			letter-spacing: 2px;
+			color: black;
+			font-family: "Trebuchet MS", "Arial", sans-serif;
+			text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;'>Geospatial Projects
         <small></small>
       </h1>
 	  
@@ -91,8 +95,49 @@
           <a class="btn btn-primary" href="cabi\cabi_trips.html">View Project</a>
         </div>
       </div>
+		<!-- /.row -->
+      <hr>
+      
+	<!-- Project PR-Quadtree -->
+      <div class="row">
+        <div class="col-md-7">
+          <a href= 'prqt\quadtree.html'>
+            <img src="quadtreeThumbnail.png"
+                 class = 'thumbnails'
+                 alt="preview of pr-quadtree">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <a href = "prqt\quadtree.html"><h3>Building Geospatial Data Structures: The PR-Quadtree</h3></a>
+          <p>The PR-Quadtree is a commonly-used data structure for storing and accessing geospatial data. Here, I 
+			implement a PR-Quadtree in Python and use Matplotlib to visualize the data it stores</p>
+          <a class="btn btn-primary" href="prqt\quadtree.html">View Project</a>
+        </div>
+      </div>
       <!-- /.row -->
       <hr>
+	  
+	  
+	  <!-- Project R -->
+      <div class="row">
+        <div class="col-md-7">
+          <a href= 'r\rbikes.html'>
+            <img src="rbikesThumbnail.png"
+                 class = 'thumbnails'
+                 alt="preview of r bikeshare project">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <a href = "r\rbikes.html"><h3>Analyzing NYC Bikeshare Ridership with R</h3></a>
+          <p>For this project, I used R and its spatial packages to analyze factors that affect bikeshare ridership
+		  in New York's Citibike system.</p>
+          <a class="btn btn-primary" href="prqt\quadtree.html">View Project</a>
+        </div>
+      </div>
+      <!-- /.row -->
+      <hr>
+	  
+	  
       <!-- Project Two -->
       <div class="row">
         <div class="col-md-7">
@@ -103,10 +148,10 @@
           </a>
         </div>
         <div class="col-md-5">
-          <a href = "thesis\thesis.html"><h3>Senior Thesis: Spatial Analysis of MODIS Evapotranspiration Rasters Using Python</h3></a>
-          <p>For my geology degree, I am performing an independent research project under the guidance of Dr. Karen
-          Prestegaard. This study focuses on comparing the MODIS evapotranspiration (ET) estimates produced by the MOD16 algorithm
-          with ET measurements that were directly measured at flux towers in the Canadian boreal forest.</p>
+          <a href = "thesis\thesis.html"><h3>Senior Thesis: Using Python to Determine the Accuracy of Satellite Data</h3></a>
+          <p>For my geology degree, I completed an independent research project under the guidance of Dr. Karen
+          Prestegaard. This study focused on comparing the MODIS evapotranspiration (ET) estimates produced by the MOD16 algorithm
+          with direct measurements of ET from flux towers in the Canadian boreal forest.</p>
           <a class="btn btn-primary" href="thesis\thesis.html">View Project</a>
         </div>
       </div>
