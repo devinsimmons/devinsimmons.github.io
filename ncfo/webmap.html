@@ -195,8 +195,7 @@
 		function onEachTrip(feature, layer) {
 			
 			if (feature.properties.SEGMENT_NAME) {
-				layer.bindPopup('<b>'+feature.properties.SEGMENT_NAME+'</b>' 
-						'<p>Segment ID: ' + feature.properties.SEGMENT_ID + '</p>');
+				layer.bindPopup('<b>'+feature.properties.SEGMENT_NAME+'</b> <p>Segment ID: ' + feature.properties.SEGMENT_ID + '</p>');
 			}
 		}
 		
@@ -206,8 +205,7 @@
 				mouseout: resetHighlight
 			});
 			if (feature.properties.END_TERMINAL_NAME) {
-				layer.bindPopup('<b>' + feature.properties.END_TERMINAL_NAME + '</b>'
-					        '<p>Terminal ID: ' + feature.properties.TERMINAL_ID + '</p>');
+				layer.bindPopup('<b>' + feature.properties.END_TERMINAL_NAME + '</b><p>Terminal ID: ' + feature.properties.TERMINAL_ID + '</p>');
 
 			}
 		}
