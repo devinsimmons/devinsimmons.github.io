@@ -182,7 +182,7 @@
 		info.update = function (terminals_json) {
 			if (ncfoMap.hasLayer(terminals)) {
 					this._div.innerHTML = '<h6>NCFO Terminal Name</h6>' +  (terminals_json ?
-					'<b>' + terminals_json.terminal_name + '</b>'
+					'<b>' + terminals_json.END_TERMINAL_NAME + '</b>'
 					: 'Hover over a terminal');
 			}
 		};
@@ -194,8 +194,9 @@
 		
 		function onEachTrip(feature, layer) {
 			
-			if (feature.properties.segment_name) {
-				layer.bindPopup('<b>'+feature.properties.segment_name+'</b><p>NCFO Segment</p>');
+			if (feature.properties.SEGMENT_NAME) {
+				layer.bindPopup('<b>'+feature.properties.SEGMENT_NAME+'</b>' 
+						'<p>Segment ID: ' + feature.properties.SEGMENT_ID + '</p>');
 			}
 		}
 		
@@ -204,8 +205,9 @@
 				mouseover: highlightFeature,
 				mouseout: resetHighlight
 			});
-			if (feature.properties.terminal_name) {
-				layer.bindPopup('<b>' + feature.properties.terminal_name + '</b><p>NCFO Terminal</p>');
+			if (feature.properties.END_TERMINAL_NAME) {
+				layer.bindPopup('<b>' + feature.properties.END_TERMINAL_NAME + '</b>'
+					        '<p>Terminal ID: ' + feature.properties.TERMINAL_ID + '</p>');
 
 			}
 		}
